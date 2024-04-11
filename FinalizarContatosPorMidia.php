@@ -28,6 +28,15 @@ try {
             ChatEventoPublish::finalizarContatoInatividade($chatAtendimentoDTO["chatContato"]["id"], null); // add the second argument here
             echo "\n".$chatAtendimentoDTO['chatContato']['id']." | ".$chatAtendimentoDTO['chatContato']['hash']." ==> Finalizado!";
             $contFinalizados++;
+
+            // call the finalizarContato.php script for each finalized chat
+            $command = "php /home/futurofone/web/core/cmd/chat/finalizarContato.php " . $chatAtendimentoDTO["chatContato"]["id"];
+            exec($command, $output, $return_var);
+
+            // check if the command was successful
+            if ($return_var !== 0) {
+                echo "Error finalizing chat with ID: " . $chatAtendimentoDTO["chatContato"]["id"] . "\n";
+            }
         }
     }
 } catch (SistemaException $ex) {
