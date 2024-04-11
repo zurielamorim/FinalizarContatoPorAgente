@@ -25,7 +25,7 @@ try {
                 echo "\nIniciando processo de finalização dos chats da midia ".$chatAtendimentoDTO['chatContato']['nomeMidiaSocial'];
                 echo "\n ID  |  Contato";
             }
-            ChatEventoPublish::finalizarContatoInatividade($chatAtendimentoDTO["chatContato"]["id"]);
+            ChatEventoPublish::finalizarContatoInatividade($chatAtendimentoDTO["chatContato"]["id"], null); // add the second argument here
             echo "\n".$chatAtendimentoDTO['chatContato']['id']." | ".$chatAtendimentoDTO['chatContato']['hash']." ==> Finalizado!";
             $contFinalizados++;
         }
@@ -43,5 +43,3 @@ if ($contFinalizados == 0) {
 }
 
 echo "\n";
-
-########################################################################################################################
