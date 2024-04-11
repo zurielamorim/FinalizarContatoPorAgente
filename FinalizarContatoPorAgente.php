@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "init.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "init_core.php";
 
 use FuturofoneCore\Futurofone\Service\Cache\ChatAtendimentoCacheService;
 use FuturofoneCore\Futurotec\Exception\SistemaException;
@@ -24,7 +24,7 @@ try {
                 echo "\nIniciando processo de finalização dos chats do agente ".$chatAtendimentoDTO['agente']['nome'];
                 echo "\n ID  |  Contato";
             }
-            ChatEventoPublish::finalizarContatoInatividade($chatAtendimentoDTO["chatContato"]["id"]);
+            ChatEventoPublish::finalizarContatoInatividade($chatAtendimentoDTO["chatContato"]["id"], $chatAtendimentoDTO["chatContato"]["hash"]);
             echo "\n".$chatAtendimentoDTO['chatContato']['id']." | ".$chatAtendimentoDTO['chatContato']['hash']." ==> Finalizado!";
             $contFinalizados++;
         }
@@ -42,5 +42,3 @@ if ($contFinalizados == 0) {
 }
 
 echo "\n";
-
-########################################################################################################################
